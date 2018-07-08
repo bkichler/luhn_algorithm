@@ -6,7 +6,7 @@
 
 module Luhn
   def self.is_valid?(number)
-    num_array = number.to_s.split(//).map { |num| num.to_i }.reverse
+    num_array = number.to_s.split(//).map(&:to_i).reverse
 
     doubled = num_array.map.with_index do |num, index|
       if index.odd?
@@ -27,29 +27,4 @@ module Luhn
     end
     (total % 10).zero?
   end
-end
-
-def doubled
-  number = 4194560385008504
-  num_array = number.to_s.split(//).map { |num| num.to_i }.reverse
-  num_array.map.with_index do |num, index|
-    if index % 2 == 1
-      if num * 2 >= 10
-        (num * 2) - 9
-      else 
-        num * 2
-      end
-    else
-      num
-    end
-  end
-end
-
-def sum(array)
-  total = 0
-  while array.size > 0
-    new_total = array.shift + total
-    total = new_total
-  end
-  return total
 end
