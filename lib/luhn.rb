@@ -6,8 +6,9 @@
 
 module Luhn
   def self.is_valid?(number)
+    # Split into string array, convert back to integers, reverse the array
     num_array = number.to_s.split(//).map(&:to_i).reverse
-
+    # Double every second digit, subtracting 9 when >= 10
     doubled = num_array.map.with_index do |num, index|
       if index.odd?
         if num * 2 >= 10
@@ -17,9 +18,9 @@ module Luhn
         end
       else
         num
-      end    
+      end 
     end
-
+    # Add each element, test if divisible by 10
     total = 0
     while !doubled.empty?
       new_total = doubled.shift + total
